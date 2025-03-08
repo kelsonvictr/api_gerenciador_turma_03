@@ -9,6 +9,8 @@ import br.com.gerenciador.api.repository.FornecedorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class FornecedorServiceImpl implements FornecedorService {
@@ -23,5 +25,12 @@ public class FornecedorServiceImpl implements FornecedorService {
         Fornecedor fornecedor = fornecedorMapper.toEntity(dto);
         return fornecedorMapper.toDTO(fornecedorRepository.save(fornecedor));
 
+    }
+
+    @Override
+    public List<FornecedorResponseDTO> listarTodosFornecedores() {
+        return fornecedorRepository.findAll().stream()
+                .map(fornecedorMapper::toDTO)
+                .toList();
     }
 }
