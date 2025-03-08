@@ -42,5 +42,11 @@ public class FornecedorController {
         return ResponseEntity.ok(fornecedorService.atualizarFornecedorPeloId(id, dto));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarFornecedorPeloId(@PathVariable Long id) {
+        fornecedorService.deletarFornecedorPeloId(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

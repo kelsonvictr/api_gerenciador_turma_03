@@ -61,4 +61,15 @@ public class FornecedorServiceImpl implements FornecedorService {
 
         return fornecedorMapper.toDTO(fornecedor);
     }
+
+    @Transactional
+    @Override
+    public void deletarFornecedorPeloId(Long id) {
+        if (!fornecedorRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Fornecedor não encontrado");
+        }
+
+        fornecedorRepository.deleteById(id);
+    }
 }
