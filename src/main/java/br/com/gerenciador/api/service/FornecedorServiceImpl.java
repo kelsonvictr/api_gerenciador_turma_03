@@ -6,6 +6,7 @@ import br.com.gerenciador.api.mapper.EnderecoMapper;
 import br.com.gerenciador.api.mapper.FornecedorMapper;
 import br.com.gerenciador.api.model.Fornecedor;
 import br.com.gerenciador.api.repository.FornecedorRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,23 @@ public class FornecedorServiceImpl implements FornecedorService {
         Fornecedor fornecedor = fornecedorRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Fornecedor não encontrado"));
+        return fornecedorMapper.toDTO(fornecedor);
+    }
+
+    @Transactional
+    @Override
+    public FornecedorResponseDTO atualizarFornecedorPeloId(Long id, FornecedorRequestDTO dto) {
+        Fornecedor fornecedor = fornecedorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Fornecedor não encontrado"));
+
+        fornecedor.setNome(dto.nome());
+        fornecedor.setCnpj(dto.cnpj());
+        fornecedor.setTipoFornecedor(dto.tipoFornecedor());
+        fornecedor.setEndereco(enderecoMapper.toEntity((dto.endereco())));
+
+        fornecedorRepository.save(fornecedor);
+
         return fornecedorMapper.toDTO(fornecedor);
     }
 }

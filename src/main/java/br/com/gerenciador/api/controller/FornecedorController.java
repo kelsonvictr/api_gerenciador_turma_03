@@ -34,5 +34,13 @@ public class FornecedorController {
         return ResponseEntity.ok(fornecedorService.buscarFornecedorPeloId(id));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<FornecedorResponseDTO> atualizarFornecedorPeloId
+            (@PathVariable Long id,
+             @Valid @RequestBody FornecedorRequestDTO dto
+             ) {
+        return ResponseEntity.ok(fornecedorService.atualizarFornecedorPeloId(id, dto));
+    }
+
 
 }
