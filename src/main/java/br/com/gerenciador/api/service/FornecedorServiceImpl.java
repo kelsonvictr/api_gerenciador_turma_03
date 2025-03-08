@@ -7,7 +7,9 @@ import br.com.gerenciador.api.mapper.FornecedorMapper;
 import br.com.gerenciador.api.model.Fornecedor;
 import br.com.gerenciador.api.repository.FornecedorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -32,5 +34,13 @@ public class FornecedorServiceImpl implements FornecedorService {
         return fornecedorRepository.findAll().stream()
                 .map(fornecedorMapper::toDTO)
                 .toList();
+    }
+
+    @Override
+    public FornecedorResponseDTO buscarFornecedorPeloId(Long id) {
+        Fornecedor fornecedor = fornecedorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Fornecedor não encontrado"));
+        return fornecedorMapper.toDTO(fornecedor);
     }
 }

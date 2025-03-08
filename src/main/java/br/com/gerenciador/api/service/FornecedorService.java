@@ -9,4 +9,6 @@ public interface FornecedorService {
 
     FornecedorResponseDTO criarFornecedor(FornecedorRequestDTO dto);
     List<FornecedorResponseDTO> listarTodosFornecedores();
+    FornecedorResponseDTO buscarFornecedorPeloId(Long id);
+
 }

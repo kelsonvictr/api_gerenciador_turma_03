@@ -29,5 +29,10 @@ public class FornecedorController {
         return ResponseEntity.ok(fornecedorService.listarTodosFornecedores());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<FornecedorResponseDTO> buscarFornecedorPeloId(@PathVariable Long id) {
+        return ResponseEntity.ok(fornecedorService.buscarFornecedorPeloId(id));
+    }
+
 
 }
