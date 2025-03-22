@@ -3,6 +3,7 @@ package br.com.gerenciador.api.model;
 import br.com.gerenciador.api.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "usuario")
 @Entity
+@Builder
 public class Usuario {
 
     @Id
