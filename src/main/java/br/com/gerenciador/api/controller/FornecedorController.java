@@ -6,6 +6,7 @@ import br.com.gerenciador.api.service.FornecedorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,6 +44,7 @@ public class FornecedorController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletarFornecedorPeloId(@PathVariable Long id) {
         fornecedorService.deletarFornecedorPeloId(id);
         return ResponseEntity.noContent().build();
