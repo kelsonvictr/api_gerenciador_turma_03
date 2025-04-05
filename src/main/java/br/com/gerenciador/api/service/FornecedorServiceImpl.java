@@ -53,6 +53,7 @@ public class FornecedorServiceImpl implements FornecedorService {
                         "Fornecedor não encontrado"));
 
         fornecedor.setNome(dto.nome());
+        fornecedor.setEmail(dto.email());
         fornecedor.setCnpj(dto.cnpj());
         fornecedor.setTipoFornecedor(dto.tipoFornecedor());
         fornecedor.setEndereco(enderecoMapper.toEntity((dto.endereco())));
